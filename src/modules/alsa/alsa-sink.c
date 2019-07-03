@@ -1915,6 +1915,7 @@ static void thread_func(void *userdata) {
             unsigned n;
 
             pollfd = pa_rtpoll_item_get_pollfd(u->alsa_rtpoll_item, &n);
+            pollfd->revents = 0;
 
             if ((err = snd_pcm_poll_descriptors_revents(u->pcm_handle, pollfd, n, &revents)) < 0) {
                 pa_log("snd_pcm_poll_descriptors_revents() failed: %s", pa_alsa_strerror(err));
